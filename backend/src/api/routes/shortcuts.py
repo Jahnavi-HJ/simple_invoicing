@@ -20,8 +20,8 @@ DEFAULTS: dict[str, str] = {
     "go_invoices":    "Alt+I",
     "go_ledgers":     "Alt+L",
     "go_products":    "Alt+P",
-    "go_inventory":   "Alt+V",
     "go_day_book":    "Alt+D",
+    "go_tax_ledger":  "Alt+T",
     "focus_scan":     "Alt+S",
     "go_invoice_dues": "Alt+U",
     "go_credit_notes": "Alt+N",
@@ -101,3 +101,9 @@ def delete_all_shortcuts(
 ) -> None:
     db.query(UserShortcut).filter(UserShortcut.user_id == current_user.id).delete()
     db.commit()
+
+
+def test_shortcuts_defaults_sync():
+    from src.api.routes.shortcuts import DEFAULTS
+    assert "go_tax_ledger" in DEFAULTS
+    assert "go_inventory" not in DEFAULTS
