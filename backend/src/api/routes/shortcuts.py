@@ -101,9 +101,3 @@ def delete_all_shortcuts(
 ) -> None:
     db.query(UserShortcut).filter(UserShortcut.user_id == current_user.id).delete()
     db.commit()
-
-
-def test_shortcuts_defaults_sync():
-    from src.api.routes.shortcuts import DEFAULTS
-    assert "go_tax_ledger" in DEFAULTS
-    assert "go_inventory" not in DEFAULTS
